@@ -1,13 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types"
 
-function Food({ name, picture, rating }) {
-  return <div>
-    <h2>I like {name}</h2>
-    <h4>{rating}/5.0</h4>
-    <img src={picture} width='200px' alt={name}></img>
-  </div>
-}
+
 
 Food.propTypes = {
   name: PropTypes.string.isRequired,
@@ -36,13 +30,22 @@ const foodILike = [
   }
 ];
 
+function renderFood(dish) {
+  return <Food name={dish.name} picture={dish.image} rating={dish.rating} key={dish.id} />
+}
+
+function Food({ name, picture, rating }) {
+  return <div>
+    <h2>I like {name}</h2>
+    <h4>{rating}/5.0</h4>
+    <img src={picture} width='200px' alt={name}></img>
+  </div>
+}
+
 function App() {
   return (
     <div>
-      <h1>Hello!!</h1>
-      {foodILike.map(dish => (
-        <Food key={dish.id} name={dish.name} picture={dish.image} rating={dish.rating} />
-      ))}
+      {foodILike.map(renderFood)}
     </div>
   );
 }
